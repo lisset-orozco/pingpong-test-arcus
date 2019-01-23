@@ -5,8 +5,6 @@ ruby '2.5.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.1'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -22,10 +20,17 @@ gem 'bcrypt', '~> 3.1.7'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# ActiveModel::Serializers allows you to generate your JSON in an object-oriented and convention-driven manner.
+gem 'active_model_serializers', '~> 0.10.8'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
 group :development, :test do
+  # Add a comment with the structure that the model/table has
+  gem 'annotate', '~> 2.7', '>= 2.7.4'
+  # console
+  gem 'awesome_print', '~> 1.8'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
@@ -40,6 +45,8 @@ group :development, :test do
 
   # A Ruby static code analyzer, based on the community Ruby style guide.
   gem 'rubocop', require: false
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
 end
 
 group :development do
@@ -58,6 +65,10 @@ group :test do
 
   # Making tests easy on the fingers and eyes
   gem 'shoulda-matchers', '~> 3.1'
+end
+
+group :production do
+  gem 'pg', '0.20.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
