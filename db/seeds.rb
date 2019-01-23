@@ -5,3 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+8.times do |f|
+  f += 1
+
+  User.create(
+    first_name: "player#{f}",
+    last_name: "arcus#{f}",
+    email: "player#{f}@gmail.com",
+    password: '123456'
+  )
+  puts "#{f} usuarios creados" # if (f % 100).zero?
+end
