@@ -10,7 +10,9 @@ class GamesController < ApplicationController
   def create
     @game = Game.new(game_params)
 
-    if @game.save
+    if @game.save  
+      RecordService.new(@game).save
+
       render json: GameSerializer.new(@game), status: :created
     else
       render json: @game.errors.as_json, status: :unprocessable_entity
