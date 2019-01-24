@@ -8,6 +8,8 @@ class RecordService
     Record.create(user: player_loser, game: @game, points_lost: 3)
   end
 
+  private 
+  
   def player_won
     return @game.player if @game.player_score > @game.opponent_score
     @game.opponent
