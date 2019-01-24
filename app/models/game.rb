@@ -7,13 +7,5 @@ class Game < ApplicationRecord
   validates :player_score, presence: true
   validates :opponent_score, presence: true
   validates :played_at, presence: true
-  
-  after_save :dispatch_records
 
-  protected
-
-  def dispatch_records
-    RecordService.new(self).save
-  end
-  
 end
