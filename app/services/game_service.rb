@@ -4,7 +4,9 @@ class GameService
   end
 
   def create_object
-    return true if @game.save && RecordService.new(@game).create_object
+    @game.transaction do
+      return true if @game.save && RecordService.new(@game).create_object
+    end
     false
   end
 

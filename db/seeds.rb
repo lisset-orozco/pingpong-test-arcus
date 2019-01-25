@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# Users
 8.times do |f|
   f += 1
 
@@ -15,69 +16,22 @@
     email: "player#{f}@gmail.com",
     password: '123456'
   )
-  puts "#{f} usuarios creados" # if (f % 100).zero?
+  puts "#{f} users created"
 end
 
-GameService.new(
-  player_id: 1,
-  opponent_id: 2,
-  player_score: 9,
-  opponent_score: 21,
-  played_at: "2018-11-11T19:31:04.431-06:00"
-).create_object
+# Games
+rivals = [[1, 2], [3, 4], [5, 6], [7, 8], [1, 3], [2, 4], [5, 7], [6, 8]]
+scores = [[9, 21], [21, 19], [24, 22], [9, 21],[21, 19], [24, 22], [9, 21], [21, 19]]
 
-GameService.new(
-  player_id: 3,
-  opponent_id: 4,
-  player_score: 21,
-  opponent_score: 19,
-  played_at: "2018-11-11T19:31:04.431-06:00"
-).create_object
+rivals.each_with_index do |r, i|
+  s = scores[i]
 
-GameService.new(
-  player_id: 5,
-  opponent_id: 6,
-  player_score: 24,
-  opponent_score: 22,
-  played_at: "2018-11-11T19:31:04.431-06:00"
-).create_object
-
-GameService.new(
-  player_id: 7,
-  opponent_id: 8,
-  player_score: 9,
-  opponent_score: 21,
-  played_at: "2018-11-11T19:31:04.431-06:00"
-).create_object
-
-GameService.new(
-  player_id: 1,
-  opponent_id: 3,
-  player_score: 21,
-  opponent_score: 19,
-  played_at: "2018-11-11T19:31:04.431-06:00"
-).create_object
-
-GameService.new(
-  player_id: 2,
-  opponent_id: 4,
-  player_score: 24,
-  opponent_score: 22,
-  played_at: "2018-11-11T19:31:04.431-06:00"
-).create_object
-
-GameService.new(
-  player_id: 5,
-  opponent_id: 7,
-  player_score: 9,
-  opponent_score: 21,
-  played_at: "2018-11-11T19:31:04.431-06:00"
-).create_object
-
-GameService.new(
-  player_id: 6,
-  opponent_id: 8,
-  player_score: 21,
-  opponent_score: 19,
-  played_at: "2018-11-11T19:31:04.431-06:00"
-).create_object
+  puts "player #{r.first} vs player #{r.second}"
+    
+  GameService.new(player_id: r.first,
+                  opponent_id: r.second,
+                  player_score: s.first,
+                  opponent_score: s.second,
+                  played_at: Time.now
+  ).create_object
+end

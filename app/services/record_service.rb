@@ -4,7 +4,7 @@ class RecordService
   end
 
   def create_object
-    Record.create(user: player_won, game: @game, points_won: 5)
+    Record.create(user: player_won, game: @game, points_won: 5) &&
     Record.create(user: player_loser, game: @game, points_lost: 3)
   end
 
@@ -16,7 +16,7 @@ class RecordService
   end
 
   def player_loser
-    return @game.opponent if @game.player_score < @game.opponent_score
-    @game.player
+    return @game.player if @game.player_score < @game.opponent_score
+    @game.opponent
   end
 end
