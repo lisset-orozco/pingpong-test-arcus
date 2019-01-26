@@ -3,6 +3,6 @@ class Record < ApplicationRecord
   belongs_to :game, class_name: 'Game'
 
   scope :ranking_list, -> { group(:user_id)
-                            .select("user_id, SUM(points_won - points_lost) as points")
-                            .order("points DESC") }
+                            .select("user_id, SUM(points_won - points_lost) as score")
+                            .order("score DESC") }
 end
