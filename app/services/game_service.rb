@@ -13,4 +13,22 @@ class GameService
   def object
     @game
   end
+
+  def self.ranking
+    ranking_list = Record.ranking_list
+    leaderboard = []
+
+    ranking_list.each_with_index do |rank, i|
+      leaderboard.push(
+          Leaderboard.new(
+            id: rank.user_id,
+            rank: i + 1,
+            first_name: rank.user.first_name,
+            last_name: rank.user.last_name,
+            email: rank.user.email
+          )
+      )
+    end
+    leaderboard
+  end
 end

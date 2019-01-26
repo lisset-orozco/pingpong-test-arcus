@@ -32,6 +32,6 @@ rivals.each_with_index do |r, i|
                   opponent_id: r.second,
                   player_score: s.first,
                   opponent_score: s.second,
-                  played_at: Time.now
+                  played_at: Time.now + i.days
   ).create_object
 end

@@ -8,4 +8,5 @@ class Game < ApplicationRecord
   validates :opponent_score, presence: true
   validates :played_at, presence: true
 
+  scope :desc_order, -> { order(played_at: :desc) }
 end

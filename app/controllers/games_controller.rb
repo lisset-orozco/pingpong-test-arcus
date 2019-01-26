@@ -2,9 +2,7 @@ class GamesController < ApplicationController
   before_action :find_game, only: :show
 
   def index
-    @games = Game.all
-
-    render json: @games, each_serializer: GameShowSerializer
+    render json: Game.desc_order, each_serializer: GameShowSerializer
   end
 
   def create
@@ -21,10 +19,20 @@ class GamesController < ApplicationController
     render json: @game
   end
 
+  def leaderboard
+    render json: GameService.ranking, each_serializer: LeaderboardSerializer
+  end
+
   private
 
   def game_params
-    params.require(:game).permit(:player_id, :opponent_id, :player_score, :opponent_score, :played_at)
+    params.require(:game).permit(
+      :player_id, 
+      :opponent_id, 
+      :player_score, 
+      :opponent_score, 
+      :played_at
+    )
   end
 
   def find_game 
