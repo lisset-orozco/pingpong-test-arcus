@@ -58,11 +58,9 @@ Rails.application.configure do
     address:              'smtp.gmail.com',
     port:                 587,
     domain:               'example.com',
-    user_name:            'alexa8723@gmail.com',
-    password:             'Omega8723',
+    user_name:            ENV['EMAIL_USER'],
+    password:             ENV['EMAIL_PASSWORD'],
     authentication:       'plain',
     enable_starttls_auto: true 
   }
-
-  config.active_job.queue_adapter = :sidekiq
 end
