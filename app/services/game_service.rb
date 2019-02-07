@@ -5,7 +5,10 @@ class GameService
 
   def create_object
     @game.transaction do
-      return true if @game.save && RecordService.new(@game).create_object
+      if @game.save && RecordService.new(@game).create_object
+        self.class.send_ranking_list # Send Email
+        return true
+      end
     end
     false
   end
@@ -15,15 +18,19 @@ class GameService
   end
 
   class << self
-
-    def ranking
+    def ranking_list
       ranking_list = Record.ranking_list
       @score_previous = 0
       @index_previous = 0
-
+      
       ranking_list.map { |rank| build_object(rank) }
     end
-    
+
+    def send_ranking_list
+      list = ranking_list
+      list.map(&:id).each { |user_id| SendLeaderboardJob.perform_later(user_id, list.as_json) }
+    end
+  
     private
 
     def validate_rank(score)
