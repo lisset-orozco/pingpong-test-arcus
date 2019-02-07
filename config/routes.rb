@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require 'sidekiq/web'
+require 'resque/server'
 
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   resources :games, only: %i[index show create]
   get :leaderboard, to: 'games#leaderboard'
 
-  mount Sidekiq::Web => '/sidekiq'
+  mount Resque::Server.new => '/resque'
 end

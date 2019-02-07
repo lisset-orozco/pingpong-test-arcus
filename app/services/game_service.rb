@@ -27,7 +27,8 @@ class GameService
     end
 
     def send_ranking_list
-      SendLeaderboardJob.perform_later # JOB
+      list = ranking_list
+      list.map(&:id).each { |user_id| SendLeaderboardJob.perform_later(user_id, list.as_json) }
     end
   
     private

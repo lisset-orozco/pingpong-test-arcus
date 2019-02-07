@@ -44,8 +44,5 @@ module PingPong
 
     # Disable the timestamp naming of migrations:
     config.active_record.timestamped_migrations = false
-
-    # Sidekiq
-    config.active_job.queue_adapter = :sidekiq
   end
 end

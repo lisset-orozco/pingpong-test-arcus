@@ -1,8 +1,8 @@
 class SendLeaderboardJob < ApplicationJob
-  queue_as :default
+  queue_as :email_leaderboard
 
-  def perform
-    leader_list = GameService.ranking_list
-    leader_list.each { |user| LeaderboardMailer.with(user: user, leader_list: leader_list).send_leaderboard.deliver_now }
+  def perform(user_id, list)
+    user = User.find_by_id(user_id)
+    LeaderboardMailer.send_leaderboard(user, list).deliver_later unless user.nil?
   end
 end
