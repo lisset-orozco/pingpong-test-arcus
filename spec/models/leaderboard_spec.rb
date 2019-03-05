@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Leaderboard, type: :model do
-  ATTRIBUTES = %i[ id rank first_name last_name email ].freeze
+  ATTRIBUTES = %i[id rank first_name last_name email].freeze
   
   subject { FactoryBot.build(:leaderboard) }
   

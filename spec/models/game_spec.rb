@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do
-  ATTRIBUTES = %i[ player opponent player_score opponent_score played_at ]
+  let(:attributes) { attributes_for(:game) }
 
   describe 'associations' do
-    [:opponent, :player].each { |association| it { should belong_to(association) } }
+    %i[opponent player].each { |association| it { should belong_to(association) } }
   end
   
   describe 'validations' do
-    ATTRIBUTES.each { |attribute| it { should validate_presence_of(attribute) } }
+    it { attributes.each { |attribute| should validate_presence_of(attribute.first) } }
   end
 
   describe '.desc_order' do

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Record, type: :model do
 
   describe 'associations' do
-    [:user, :game].each { |association| it { should belong_to(association) } }
+    %i[user game].each { |association| it { should belong_to(association) } }
   end
 
   describe '.ranking_list' do
