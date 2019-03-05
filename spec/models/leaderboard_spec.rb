@@ -1,13 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Leaderboard, type: :model do
+  ATTRIBUTES = %i[ id rank first_name last_name email ].freeze
+  
   subject { FactoryBot.build(:leaderboard) }
-  let!(:attributes) { %i[ id rank first_name last_name email ] }
-
+  
   describe 'attr_accessor' do
-    it 'check each attribute' do
-      attributes.each { |attribute| should respond_to(attribute) }
-    end
+    ATTRIBUTES.each { |attribute| it { should respond_to(attribute) } }
 
     # others matchers
     it (:first_name){ should be_present }
@@ -16,8 +15,6 @@ RSpec.describe Leaderboard, type: :model do
   end
 
   describe 'validations' do
-    it 'check presence of each attribute' do
-      attributes.each { |attribute| should validate_presence_of(attribute) }
-    end
+    ATTRIBUTES.each { |attribute| it { should validate_presence_of(attribute) } }
   end
 end
