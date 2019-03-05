@@ -9,3 +9,5 @@ production:
   - low
   - email_leaderboard
   - mailers
+
+# sidekiq -C config/sidekiq.yml

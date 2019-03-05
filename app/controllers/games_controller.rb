@@ -20,6 +20,7 @@ class GamesController < ApplicationController
   end
 
   def leaderboard
+    # GameService.send_ranking_list
     render json: GameService.ranking_list, each_serializer: LeaderboardSerializer
   end
 
