@@ -16,7 +16,8 @@ class GamesController < ApplicationController
   end
 
   def show
-    render json: @game
+    return render json: @game if @game
+    render json: { message: "Game doesn't exist" }, status: :not_found
   end
 
   def leaderboard

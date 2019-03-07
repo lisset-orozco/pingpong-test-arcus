@@ -15,7 +15,15 @@ class Record < ApplicationRecord
   belongs_to :user, class_name: 'User'
   belongs_to :game, class_name: 'Game'
 
+  # -- Validations ----------------------------------------------------------
+
+  validates_presence_of :points_won,
+                        :points_lost
+
+  # -- Scopes ---------------------------------------------------------------
+  
   scope :ranking_list, -> { group(:user_id)
                             .select("user_id, SUM(points_won - points_lost) as score")
                             .order("score DESC") }
+
 end

@@ -17,6 +17,10 @@ class GameService
     @game
   end
 
+  def errors
+    @game.errors
+  end
+
   class << self
     def ranking_list
       ranking_list = Record.ranking_list

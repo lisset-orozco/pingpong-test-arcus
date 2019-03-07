@@ -51,6 +51,7 @@ group :development, :test do
 
   # RSpec for Rails
   gem 'rspec-rails', '~> 3.5'
+  gem 'rails-controller-testing'
 
   # A Ruby static code analyzer, based on the community Ruby style guide.
   gem 'rubocop', require: false
