@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe GamesController, type: :controller do
@@ -10,12 +12,12 @@ RSpec.describe GamesController, type: :controller do
     { player_id: nil, opponent_id: nil, player_score: nil, opponent_score: nil, played_at: nil }
   }
 
-  describe "GET #index" do
+  describe 'GET #index' do
     before { @games = create_list(:game, 3) }
 
-    it "ok" do
+    it 'ok' do
       get :index
-      
+
       expect(response).to have_http_status(:ok)
       expect(response.body.as_json).to match(@games.as_json.to_s)
       expect(JSON.parse(response.body).map { |game| game['id'] }).to \
@@ -87,7 +89,7 @@ RSpec.describe GamesController, type: :controller do
       r33 = create(:record, user: p3, game: g3)
 
       get :leaderboard
-      puts JSON.parse(response.body)
+
       expect(response).to be_successful
       expect(response.content_type).to eq('application/json')
       expect(JSON.parse(response.body)
